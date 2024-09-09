@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Website Wisata Bukit Kehi Pamekasan">
+    <meta name="description" content="WELCOME TO SMP ISLAM PLUS AS-SA’ADATAIN">
     <meta name="keywords" content="admin,dashboard">
     <meta name="author" content="stacks">
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>DASHBOARD || Wisata Bukit Kehi Pamekasan</title>
+    <title>Dashboard || SMP ISLAM PLUS AS-SA’ADATAIN</title>
 
     <!-- Styles -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -83,32 +83,44 @@
                             <a href="" class="active"><i
                                     class="material-icons-two-tone">dashboard</i>Dashboard</a>
                         </li>
-                        <li class="@yield('active_aparatur')">
-                            <a href="{{ route('admin.aparatur') }}" class="active"><i
-                                    class="material-icons-two-tone">people</i>Aparatur</a>
+                        <li class="@yield('active_pendaftaran')">
+                            <a href="{{ route('admin.registration') }}" class="active"><i
+                                    class="material-icons-two-tone">people</i>Data Pendaftaran</a>
                         </li>
-                        <li class="@yield('active_destination')">
-                            <a href="{{ route('admin.destination') }}" class="active"><i
-                                    class="material-icons-two-tone">location_on</i>Destination</a>
+                        <li>
+                            <a href=""><i class="material-icons-two-tone">payment</i>Pembayaran<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="{{ route('admin.payment.formulir') }}">Pembayaran Formulir</a>
+                                </li>
+                                <li>
+                                    <a href="invoice.html">Invoice</a>
+                                </li>
+                                
+                            </ul>
                         </li>
-                        <li class="@yield('active_gallery')">
-                            <a href="{{ route('admin.gallery') }}" class="active"><i
-                                    class="material-icons-two-tone">photo_library</i>Gallery</a>
+                        <li class="@yield('active_pengumuman')">
+                            <a href="" class="active"><i
+                                    class="material-icons-two-tone">announcement</i>Pengumuman</a>
                         </li>
-                        <li class="@yield('active_news')">
-                            <a href="{{ route('admin.news') }}" class="active"><i
-                                    class="material-icons-two-tone">library_books</i>News & Article</a>
+                        <li class="@yield('active_kartu_ujian')">
+                            <a href="" class="active"><i
+                                    class="material-icons-two-tone">book</i>Kartu Ujian</a>
                         </li>
-                        <li class="@yield('active_product')">
-                            <a href="{{ route('admin.product') }}" class="active"><i
-                                    class="material-icons-two-tone">inventory_2</i>Product</a>
+                        <li class="@yield('active_account')">
+                            <a href="" class="active"><i
+                                    class="material-icons-two-tone">person</i>Data Account</a>
                         </li>
-                        <li class="@yield('active_facility')">
-                            <a href="{{ route('admin.facility') }}" class="active"><i
-                                    class="material-icons-two-tone">inventory_2</i>Facility</a>
+                    @elseif(Auth::user()->level == 'user')
+                        <li class="@yield('active_dashboard')">
+                            <a href="{{ route('user.dashboard') }}" class="active"><i
+                                    class="material-icons-two-tone">dashboard</i>Dashboard</a>
+                        </li>
+                        <li class="@yield('active_formulir_pendaftaran')">
+                            <a href="{{ route('user.registration') }}" class="active"><i
+                                    class="material-icons-two-tone">person</i>Formulir Pendaftaran</a>
                         </li>
                     @endif
-
 
                     <li class="sidebar-title">
                         Account

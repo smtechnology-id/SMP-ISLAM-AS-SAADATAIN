@@ -28,7 +28,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect('/login')->withErrors([
+        return redirect('/')->withErrors([
             'email' => 'Email atau password salah.',
         ]);
     }
@@ -56,6 +56,12 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'level' => $level,
         ]);
-        return redirect('/login')->with('success', 'Pendaftaran berhasil, silahkan login.');
+        return redirect('/')->with('success', 'Pendaftaran berhasil, silahkan login.');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }
