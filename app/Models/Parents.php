@@ -21,4 +21,9 @@ class Parents extends Model
         'nama_wali',
         'hubungan_keluarga',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -37,4 +37,9 @@ class Registration extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'kode_pendaftaran', 'kode_pendaftaran');
+    }
 }

@@ -16,4 +16,9 @@ class Payment extends Model
         'status',
         'kode_pendaftaran',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

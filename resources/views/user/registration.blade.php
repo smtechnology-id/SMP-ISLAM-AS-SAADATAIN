@@ -8,6 +8,34 @@
                 <div class="card-body">
                     <h5 class="card-title">Formulir Pendaftaran</h5>
                     @if ($payment_accepted)
+                        @if ($registrations)
+                            @if ($parents)
+                                @if ($additionals)
+                                    @if ($registrations->status == 'pending')
+                                        <div class="alert alert-warning">
+                                            <p>Pendaftaran sedang di verifikasi oleh admin Mohon tunggu sampai status
+                                                berubah menjadi diterima</p>
+                                        </div>
+                                    @elseif ($registrations->status == 'accepted')
+                                        <div class="alert alert-success">
+                                            <p>Pendaftaran diterima, Silahkan melakukan ke Menu <a class="text-white" href="{{ route('user.pembayaran') }}">Pembayaran</a></p>
+                                        </div>
+                                    @elseif ($registrations->status == 'rejected')
+                                        <div class="alert alert-danger">
+                                            <p>Pendaftaran ditolak</p>
+                                        </div>
+                                        @if ($notifications)
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <p style="font-size: 14px"><strong>Pesan dari admin :</strong> {{ $notifications->data }}</p>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
+                        @endif
+
                         <div class="accordion accordion-separated" id="accordionSeparatedExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingSeparatedOne">
@@ -17,7 +45,8 @@
                                         Keterangan Siswa {{ $registrations ? '✔️' : '' }}
                                     </button>
                                 </h2>
-                                <div id="collapseSeparatedOne" class="accordion-collapse collapse {{ $registrations ? '' : 'show' }}"
+                                <div id="collapseSeparatedOne"
+                                    class="accordion-collapse collapse {{ $registrations ? '' : 'show' }}"
                                     aria-labelledby="headingSeparatedOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         @if ($registrations)
@@ -32,7 +61,7 @@
                                                                 required value="{{ $registrations->nama_lengkap }}"></td>
                                                         <input type="hidden" name="id"
                                                             value="{{ $registrations->id }}">
-                                                        
+
                                                     </tr>
                                                     <tr>
                                                         <td>Jenis Kelamin <span class="text-danger">*</span></td>
@@ -112,8 +141,8 @@
                                                         <td>Tinggi Badan (cm)</td>
                                                         <td>:</td>
                                                         <td>
-                                                            <input type="number" class="form-control" name="tinggi_badan"
-                                                                placeholder="Opsional"
+                                                            <input type="number" class="form-control"
+                                                                name="tinggi_badan" placeholder="Opsional"
                                                                 value="{{ $registrations->tinggi_badan }}">
                                                         </td>
                                                     </tr>
@@ -121,8 +150,8 @@
                                                         <td>Golongan Darah</td>
                                                         <td>:</td>
                                                         <td>
-                                                            <input type="text" class="form-control" name="golongan_darah"
-                                                                placeholder="Opsional"
+                                                            <input type="text" class="form-control"
+                                                                name="golongan_darah" placeholder="Opsional"
                                                                 value="{{ $registrations->golongan_darah }}">
                                                         </td>
                                                     </tr>
@@ -131,7 +160,8 @@
                                                         <td>:</td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                name="penyakit_yang_pernah_diderita" placeholder="Opsional"
+                                                                name="penyakit_yang_pernah_diderita"
+                                                                placeholder="Opsional"
                                                                 value="{{ $registrations->penyakit_yang_pernah_diderita }}">
                                                         </td>
                                                     </tr>
@@ -421,9 +451,11 @@
                                         data-bs-target="#collapseSeparatedTwo" aria-expanded="false"
                                         aria-controls="collapseSeparatedTwo">
                                         Orang Tua / Wali {{ $parents ? '✔️' : '' }}
+
                                     </button>
                                 </h2>
-                                <div id="collapseSeparatedTwo" class="accordion-collapse collapse {{ $parents ? '' : 'show' }}"
+                                <div id="collapseSeparatedTwo"
+                                    class="accordion-collapse collapse {{ $parents ? '' : 'show' }}"
                                     aria-labelledby="headingSeparatedTwo" data-bs-parent="#accordionSeparatedExample">
                                     <div class="accordion-body">
                                         @if ($parents)
@@ -563,7 +595,8 @@
                                         Asal Siswa {{ $additionals ? '✔️' : 'Tambah' }}
                                     </button>
                                 </h2>
-                                <div id="collapseSeparatedThree" class="accordion-collapse collapse {{ $additionals ? '' : 'show' }}"
+                                <div id="collapseSeparatedThree"
+                                    class="accordion-collapse collapse {{ $additionals ? '' : 'show' }}"
                                     aria-labelledby="headingSeparatedThree" data-bs-parent="#accordionSeparatedExample">
                                     <div class="accordion-body">
                                         @if ($additionals)
@@ -691,6 +724,223 @@
                                                     </tr>
                                                 </table>
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSeparatedFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseSeparatedFour" aria-expanded="false"
+                                        aria-controls="collapseSeparatedFour">
+                                        Dokumen
+                                    </button>
+                                </h2>
+                                <div id="collapseSeparatedFour" class="accordion-collapse collapse"
+                                    aria-labelledby="headingSeparatedFour" data-bs-parent="#accordionSeparatedExample">
+                                    <div class="accordion-body">
+                                        @if ($documents)
+                                            <form action="{{ route('user.documents.update') }}" method="post"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <table class="table table-borderless">
+                                                    <tr>
+                                                        <td>Scan Ijasah SD / MI yang telah Dilegalisir @if ($documents->ijazah)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="ijazah" class="form-control">
+                                                            @if ($documents->ijazah)
+                                                                <a href="{{ asset('storage/ijazah/' . $documents->ijazah) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $documents->id }}">
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Surat Keterangan Hasil Ujian (SKHU) @if ($documents->skhu)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="skhu" class="form-control">
+                                                            @if ($documents->skhu)
+                                                                <a href="{{ asset('storage/skhu/' . $documents->skhu) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kartu Keluarga @if ($documents->kk)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="kk" class="form-control">
+                                                            @if ($documents->kk)
+                                                                <a href="{{ asset('storage/kk/' . $documents->kk) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan KTP Orang Tua / Wali @if ($documents->ktp_orang_tua)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="ktp_orang_tua"
+                                                                class="form-control">
+                                                            @if ($documents->ktp_orang_tua)
+                                                                <a href="{{ asset('storage/ktp_orang_tua/' . $documents->ktp_orang_tua) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Akte Kelahiran @if ($documents->akte_kelahiran)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="akte_kelahiran"
+                                                                class="form-control">
+                                                            @if ($documents->akte_kelahiran)
+                                                                <a href="{{ asset('storage/akte_kelahiran/' . $documents->akte_kelahiran) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Raport @if ($documents->raport)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="raport" class="form-control">
+                                                            @if ($documents->raport)
+                                                                <a href="{{ asset('storage/raport/' . $documents->raport) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Surat Kematian (jika ada) @if ($documents->surat_kematian)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="surat_kematian"
+                                                                class="form-control">
+                                                            @if ($documents->surat_kematian)
+                                                                <a href="{{ asset('storage/surat_kematian/' . $documents->surat_kematian) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pas Foto 2x3 @if ($documents->pas_foto_2x3)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="pas_foto_2x3"
+                                                                class="form-control">
+                                                            @if ($documents->pas_foto_2x3)
+                                                                <a href="{{ asset('storage/pas_foto_2x3/' . $documents->pas_foto_2x3) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pas Foto 3x4 @if ($documents->pas_foto_3x4)
+                                                                ✔️
+                                                            @endif
+                                                        </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="pas_foto_3x4"
+                                                                class="form-control">
+                                                            @if ($documents->pas_foto_3x4)
+                                                                <a href="{{ asset('storage/pas_foto_3x4/' . $documents->pas_foto_3x4) }}"
+                                                                    target="_blank">Lihat</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('user.documents.store') }}" method="post"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <table class="table table-borderless">
+                                                    <tr>
+                                                        <td>Scan Ijasah SD / MI yang telah Dilegalisir</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="ijazah" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Surat Keterangan Hasil Ujian (SKHU)</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="skhu" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kartu Keluarga </td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="kk" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan KTP Orang Tua / Wali</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="ktp_orang_tua"
+                                                                class="form-control"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Akte Kelahiran</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="akte_kelahiran"
+                                                                class="form-control"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Raport</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="raport" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Scan Surat Kematian (jika ada)</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="surat_kematian"
+                                                                class="form-control"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pas Foto 2x3</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="pas_foto_2x3"
+                                                                class="form-control"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pas Foto 3x4</td>
+                                                        <td>:</td>
+                                                        <td><input type="file" name="pas_foto_3x4"
+                                                                class="form-control"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </form>
                                         @endif
                                     </div>
@@ -850,27 +1100,27 @@
                                                     <hr>
                                                     <hr>
                                                     <form action="{{ route('user.payment.store') }}" method="post"
-                                                            enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="form-group mb-3">
-                                                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                                                <input type="file" name="bukti_pembayaran"
-                                                                    class="form-control" required>
-                                                                <small class="text-muted">*Silahkan Upload bukti
-                                                                    pembayaran
-                                                                    sebagai bukti pembayaran.</small>
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="form-group mb-3">
+                                                            <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                                            <input type="file" name="bukti_pembayaran"
+                                                                class="form-control" required>
+                                                            <small class="text-muted">*Silahkan Upload bukti
+                                                                pembayaran
+                                                                sebagai bukti pembayaran.</small>
 
-                                                                <input type="hidden" name="user_id"
-                                                                    value="{{ auth()->user()->id }}">
-                                                                <input type="hidden" name="jenis_pembayaran"
-                                                                    value="Formulir">
-                                                            </div>
-                                                            <div class="d-grid gap-2">
-                                                                <button type="submit" class="btn btn-primary">Kirim
-                                                                    Bukti
-                                                                    Pembayaran</button>
-                                                            </div>
-                                                        </form>
+                                                            <input type="hidden" name="user_id"
+                                                                value="{{ auth()->user()->id }}">
+                                                            <input type="hidden" name="jenis_pembayaran"
+                                                                value="Formulir">
+                                                        </div>
+                                                        <div class="d-grid gap-2">
+                                                            <button type="submit" class="btn btn-primary">Kirim
+                                                                Bukti
+                                                                Pembayaran</button>
+                                                        </div>
+                                                    </form>
                                                     <div class="d-grid gap-2 mt-3">
                                                         <button class="btn btn-outline-primary">Cara
                                                             Pembayaran</button>

@@ -32,9 +32,20 @@ Route::group(['middleware' => ['auth.check:admin']], function () {
 
     // registration
     Route::get('/admin/registration', [AdminController::class, 'registration'])->name('admin.registration');
-
+    Route::get('/admin/registration/detail/{id}', [AdminController::class, 'registrationDetail'])->name('admin.registration.detail');
+    Route::post('/admin/registration/reject', [AdminController::class, 'registrationReject'])->name('admin.registration.reject');
+    Route::get('/admin/registration/accept/{id}', [AdminController::class, 'registrationAccept'])->name('admin.registration.accept');
     // Payment
     Route::get('/admin/payment/formulir', [AdminController::class, 'paymentFormulir'])->name('admin.payment.formulir');
+    Route::get('/admin/payment/formulir/accept/{id}', [AdminController::class, 'paymentFormulirAccept'])->name('admin.payment-formulir.accept');
+    Route::get('/admin/payment/formulir/reject/{id}', [AdminController::class, 'paymentFormulirReject'])->name('admin.payment-formulir.reject');
+    Route::get('/admin/payment/formulir/pending/{id}', [AdminController::class, 'paymentFormulirPending'])->name('admin.payment-formulir.pending');
+
+    // Payment
+    Route::get('/admin/payment/uang_masuk', [AdminController::class, 'paymentUangMasuk'])->name('admin.payment.uang_masuk');
+
+    // anouncement
+    Route::get('/admin/anouncement', [AdminController::class, 'anouncement'])->name('admin.anouncement');
 });
 
 Route::group(['middleware' => ['auth.check:user']], function () {
@@ -56,5 +67,17 @@ Route::group(['middleware' => ['auth.check:user']], function () {
     // payment
     Route::post('/user/payment/store', [UserController::class, 'paymentStore'])->name('user.payment.store');
     Route::post('/user/payment/update', [UserController::class, 'paymentUpdate'])->name('user.payment.update');
+
+    // documents
+    Route::post('/user/documents/store', [UserController::class, 'documentsStore'])->name('user.documents.store');
+    Route::post('/user/documents/update', [UserController::class, 'documentsUpdate'])->name('user.documents.update');
+
+    // pembayaran
+    Route::get('/user/pembayaran', [UserController::class, 'pembayaran'])->name('user.pembayaran');
+
+    // kartu ujian
+    Route::get('/user/kartu_ujian', [UserController::class, 'kartuUjian'])->name('user.kartu_ujian');
+
+
 });
 

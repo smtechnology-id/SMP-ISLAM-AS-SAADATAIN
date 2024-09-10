@@ -94,13 +94,12 @@
                                     <a href="{{ route('admin.payment.formulir') }}">Pembayaran Formulir</a>
                                 </li>
                                 <li>
-                                    <a href="invoice.html">Invoice</a>
+                                    <a href="{{ route('admin.payment.uang_masuk') }}">Pembayaran Uang Masuk</a>
                                 </li>
-                                
                             </ul>
                         </li>
                         <li class="@yield('active_pengumuman')">
-                            <a href="" class="active"><i
+                            <a href="{{ route('admin.anouncement') }}" class="active"><i
                                     class="material-icons-two-tone">announcement</i>Pengumuman</a>
                         </li>
                         <li class="@yield('active_kartu_ujian')">
@@ -119,6 +118,14 @@
                         <li class="@yield('active_formulir_pendaftaran')">
                             <a href="{{ route('user.registration') }}" class="active"><i
                                     class="material-icons-two-tone">person</i>Formulir Pendaftaran</a>
+                        </li>
+                        <li class="@yield('active_pembayaran')">
+                            <a href="{{ route('user.pembayaran') }}" class="active"><i
+                                    class="material-icons-two-tone">payment</i>Pembayaran</a>
+                        </li>
+                        <li class="@yield('active_kartu_ujian')">
+                            <a href="{{ route('user.kartu_ujian') }}" class="active"><i
+                                    class="material-icons-two-tone">book</i>Kartu Ujian</a>
                         </li>
                     @endif
 
