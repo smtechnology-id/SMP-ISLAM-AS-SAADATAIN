@@ -5,30 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExamCard extends Model
+class RegistrationResult extends Model
 {
     use HasFactory;
 
-    protected $table = 'exam_card';
+    protected $table = 'registration_results';
     protected $fillable = [
         'user_id',
-        'file',
+        'registration_id',
         'kode_pendaftaran',
-        'tanggal_ujian',
-        'waktu_ujian',
-        'lokasi_ujian',
+        'status',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function registration()
     {
-        return $this->belongsTo(Registration::class, 'kode_pendaftaran', 'kode_pendaftaran');
-    }
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Registration::class);
     }
 }

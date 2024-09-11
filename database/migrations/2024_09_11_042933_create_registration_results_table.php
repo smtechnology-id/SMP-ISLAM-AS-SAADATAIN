@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_card', function (Blueprint $table) {
+        Schema::create('registration_results', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('registration_id');
+            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->string('kode_pendaftaran');
-            $table->date('tanggal_ujian')->nullable();
-            $table->time('waktu_ujian')->nullable();
-            $table->string('lokasi_ujian')->nullable();
-            $table->string('file');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exam_card');
+        Schema::dropIfExists('registration_results');
     }
 };

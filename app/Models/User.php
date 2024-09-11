@@ -48,11 +48,20 @@ class User extends Authenticatable
     ];
     public function registration()
     {
-        return $this->hasOne(Registration::class, 'user_id'); // Sesuaikan dengan kolom yang tepat
+        return $this->hasOne(Registration::class, 'user_id');
     }
     public function payment()
     {
         return $this->hasOne(Payment::class, 'user_id'); // Sesuaikan dengan kolom yang tepat
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'user_id');
+    }
+
+    public function examCard()
+    {
+        return $this->hasOne(ExamCard::class, 'user_id');
     }
 
 }

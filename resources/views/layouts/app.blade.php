@@ -26,6 +26,7 @@
     <link href="{{ asset('assets/plugins/perfectscroll/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/pace/pace.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/datatables/datatables.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.5/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
@@ -42,6 +43,8 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/neptune.png') }}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/neptune.png') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+    
 
     <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 
@@ -80,7 +83,7 @@
                     </li>
                     @if (Auth::user()->level == 'admin')
                         <li class="@yield('active_dashboard')">
-                            <a href="" class="active"><i
+                            <a href="{{ route('admin.dashboard') }}" class="active"><i
                                     class="material-icons-two-tone">dashboard</i>Dashboard</a>
                         </li>
                         <li class="@yield('active_pendaftaran')">
@@ -98,16 +101,17 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="@yield('active_kartu_ujian')">
+                            <a href="{{ route('admin.exam-card') }}" class="active"><i
+                                    class="material-icons-two-tone">book</i>Kartu Ujian</a>
+                        </li>
                         <li class="@yield('active_pengumuman')">
                             <a href="{{ route('admin.anouncement') }}" class="active"><i
                                     class="material-icons-two-tone">announcement</i>Pengumuman</a>
                         </li>
-                        <li class="@yield('active_kartu_ujian')">
-                            <a href="" class="active"><i
-                                    class="material-icons-two-tone">book</i>Kartu Ujian</a>
-                        </li>
+                        
                         <li class="@yield('active_account')">
-                            <a href="" class="active"><i
+                            <a href="{{ route('admin.account') }}" class="active"><i
                                     class="material-icons-two-tone">person</i>Data Account</a>
                         </li>
                     @elseif(Auth::user()->level == 'user')
@@ -132,6 +136,12 @@
                     <li class="sidebar-title">
                         Account
                     </li>
+                    @if (Auth::user()->level == 'user')
+                        <li class="@yield('active_profile')">
+                            <a href="{{ route('user.profile') }}" class="active"><i
+                                    class="material-icons-two-tone">person</i>Profile</a>
+                        </li>
+                    @endif
                     <li class="@yiend('active')">
                         <a href="{{ route('logout') }}" class="active"><i
                                 class="material-icons-two-tone">logout</i>Logout</a>

@@ -6,24 +6,28 @@ use App\Models\User;
 use App\Models\Parents;
 use App\Models\Payment;
 use App\Models\Document;
+use App\Models\ExamCard;
 use App\Models\Additional;
 use App\Models\Notification;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $total_pendaftar = Registration::count();
+        $total_diterima = Registration::where('status', 'pass')->count();
+        $total_tidak_lolos = Registration::where('status', 'not_pass')->count();
+        return view('admin.dashboard', compact('total_pendaftar', 'total_diterima', 'total_tidak_lolos'));
     }
-
 
     // registration
     public function registration()
     {
-        $registrations = Registration::where('status', '!=', 'accepted')->get();
+        $registrations = Registration::where('status', '!=', 'accepted')->where('status', '!=', 'pass')->where('status', '!=', 'not_pass')->get();
         $registrations_accepted = Registration::where('status', 'accepted')->get();
         $registrations_pending = Registration::where('status', 'pending')->get();
         return view('admin.registration', compact('registrations', 'registrations_accepted', 'registrations_pending'));
@@ -113,10 +117,87 @@ class AdminController extends Controller
         return view('admin.payment-uang_masuk', compact('payments', 'payments_pending', 'payments_accepted', 'payments_rejected'));
     }
 
+
+
+    // exam card
+    public function examCard()
+    {
+        $payments = Payment::where('jenis_pembayaran', 'Uang Masuk')->where('status', 'accepted')->get();
+        $examCards = ExamCard::all();
+        return view('admin.exam-card', compact('payments', 'examCards'));
+    }
+    public function examCardUpload(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+        }
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            // Menggunakan storage untuk menyimpan file
+            $file->storeAs('exam_card', $filename, 'public');
+            $validatedData['file'] = $filename;
+        }
+
+        $examCard = new ExamCard();
+        $examCard->user_id = $request->user_id;
+        $examCard->kode_pendaftaran = $request->kode_pendaftaran;
+        $examCard->file = $filename;
+        $examCard->save();
+        return redirect()->back()->with('success', 'Kartu ujian telah diupload');
+    }
     // anouncement
     public function anouncement()
     {
-        $payments = Payment::where('jenis_pembayaran', 'Uang Masuk')->where('status', 'accepted')->get();
-        return view('admin.anouncement', compact('payments'));
+        $users = User::where('level', 'user')
+            ->whereHas('registrations', function ($query) {
+                $query->where('status', 'accepted');
+            })
+            ->whereHas('payment', function ($query) {
+                $query->where('jenis_pembayaran', 'Uang Masuk')->where('status', 'accepted');
+            })
+            ->get();
+        $users_lolos = User::whereHas('registrations', function ($query) {
+            $query->where('status', 'pass');
+        })->get();
+        $users_tidak_lolos = User::whereHas('registrations', function ($query) {
+            $query->where('status', 'not_pass');
+        })->get();
+        return view('admin.anouncement', compact('users', 'users_lolos', 'users_tidak_lolos'));
+    }
+
+    // pass
+    public function registrationPass(Request $request)
+    {
+        $registration = Registration::find($request->kode_pendaftaran);
+        $registration->status = $request->status;
+        $registration->save();
+        return redirect()->back()->with('success', 'Siswa telah dinyatakan Lolos Pendaftaran');
+    }
+
+
+    // account
+    public function account()
+    {
+        $users = User::where('level', 'user')->get();
+        return view('admin.account-data', compact('users'));
+    }
+    public function gantiPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+        }
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->back()->with('success', 'Password telah diubah');
     }
 }

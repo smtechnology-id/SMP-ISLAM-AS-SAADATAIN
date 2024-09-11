@@ -49,14 +49,16 @@ class AuthController extends Controller
         ]);
         $level = 'user';
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'level' => $level,
         ]);
-        return redirect('/')->with('success', 'Pendaftaran berhasil, silahkan login.');
+        
+       Auth::login($user);
+       return redirect('/user/dashboard')->with('success', 'Pendaftaran berhasil, Anda Sudah Login.');
     }
 
     public function logout()

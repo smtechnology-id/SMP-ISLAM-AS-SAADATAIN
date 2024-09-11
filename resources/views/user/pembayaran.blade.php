@@ -5,20 +5,23 @@
     <div class="card">
         <div class="card-body">
             @if ($registration)
-                @if ($registration->status == 'accepted')
-                    <h5 class="card-title">Pembayaran Biaya Masuk</h5>
+                @if ($registration->status == 'accepted' or $registration->status == 'pass' or $registration->status == 'not_pass')
+                    <h5 class="card-title">Pembayaran Uang Deposit</h5>
                     <div class="container mt-5">
                         <div class="row bg-light p-4 rounded">
                             <!-- Payment Details -->
                             <div class="col-md-12">
                                 <div class="row">
+                                    <div class="alert alert-info">
+                                        <p>Note : uang deposit sebesar Rp. 1.500.000 akan dikembalikan 100% apabila ananda tidak lolos tes. Namun apabila ananda mengundurkan diri, deposit tidak bisa dikembalikan</p>
+                                    </div>
                                     <div class="col-md-6">
-                                        <p>Bank Pembayaran:</p>
-                                        <img src="https://cdn3.iconfinder.com/data/icons/banks-in-indonesia-logo-badge/100/BNI-512.png"
-                                            alt="BNI Logo" class="img-fluid mb-3" style="max-width: 150px;">
-                                        <h5>Nomor Rekening Pembayaran Uang Masuk:</h5>
+                                        <p>Bank Pembayaran: Bank Syariah Indonesia</p>
+                                        <img src="{{ asset('assets/images/logo-bsi.jpg') }}"
+                                            alt="BSI Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                                        <h5>Nomor Rekening Pembayaran Uang Deposit:</h5>
                                         <div class="border p-3 rounded mb-3">
-                                            8581045301419027
+                                            7139715823 (A/N YSS SMP ISLAM ASSAADATAIN)
                                         </div>
                                         <h5>Jumlah Pembayaran</h5>
                                         <div class="border p-3 rounded">
@@ -98,12 +101,15 @@
                         </div>
                     </div>
                 @else
-                    <p>Silahkan selesaikan proses di menu Formulir Pendaftaran <a
-                            href="{{ route('user.registration') }}">Formulir</a></p>
+                   <div class="alert alert-warning">
+                    <p style="font-size: 16px">Silahkan selesaikan proses di menu Formulir Pendaftaran <a
+                        href="{{ route('user.registration') }}" class="text-white">Formulir, Dan Menunggu Admin Memverifikasi Formulir Anda</a></p>
+                        <label for="" class="text-muted">*Jika sudah Diverifikasi oleh admin, Menu Pembayaran Akan otomatis terbuka</label>
+                </div>
                 @endif
             @else
                 <div class="alert alert-danger">
-                    Silahkan selesaikan proses di menu Formulir Pendaftaran
+                    Anda Belum Melakukan Pendaftaran, Silahkan selesaikan proses di menu Formulir Pendaftaran
                 </div>
             @endif
         </div>

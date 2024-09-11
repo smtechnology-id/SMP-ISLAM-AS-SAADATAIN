@@ -42,4 +42,9 @@ class Registration extends Model
     {
         return $this->hasOne(Payment::class, 'kode_pendaftaran', 'kode_pendaftaran');
     }
+    public function payments()
+    {
+        return $this->hasOne(Payment::class, 'kode_pendaftaran', 'kode_pendaftaran');
+    }
+    
 }

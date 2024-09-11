@@ -11,28 +11,44 @@
                         @if ($registrations)
                             @if ($parents)
                                 @if ($additionals)
-                                    @if ($registrations->status == 'pending')
-                                        <div class="alert alert-warning">
-                                            <p>Pendaftaran sedang di verifikasi oleh admin Mohon tunggu sampai status
-                                                berubah menjadi diterima</p>
-                                        </div>
-                                    @elseif ($registrations->status == 'accepted')
-                                        <div class="alert alert-success">
-                                            <p>Pendaftaran diterima, Silahkan melakukan ke Menu <a class="text-white" href="{{ route('user.pembayaran') }}">Pembayaran</a></p>
-                                        </div>
-                                    @elseif ($registrations->status == 'rejected')
-                                        <div class="alert alert-danger">
-                                            <p>Pendaftaran ditolak</p>
-                                        </div>
-                                        @if ($notifications)
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                <p style="font-size: 14px"><strong>Pesan dari admin :</strong> {{ $notifications->data }}</p>
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
+                                    @if ($documents)
+                                        @if ($registrations->status == 'pending')
+                                            <div class="alert alert-warning">
+                                                <p>Pendaftaran sedang di verifikasi oleh admin Mohon tunggu sampai status
+                                                    berubah menjadi diterima</p>
                                             </div>
+                                        @elseif ($registrations->status == 'accepted')
+                                            <div class="alert alert-success">
+                                                <p>Pendaftaran diterima, Silahkan melakukan ke Menu <a class="text-white"
+                                                        href="{{ route('user.pembayaran') }}">Pembayaran</a></p>
+                                            </div>
+                                        @elseif ($registrations->status == 'rejected')
+                                            <div class="alert alert-danger">
+                                                <p>Pendaftaran ditolak</p>
+                                            </div>
+                                            @if ($notifications)
+                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    <p style="font-size: 14px"><strong>Pesan dari admin :</strong>
+                                                        {{ $notifications->data }}</p>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                            @endif
                                         @endif
+                                    @else
+                                        <div class="alert alert-danger">
+                                            Anda Belum Mengupload Kartu Kelulusan/ijazah
+                                        </div>
                                     @endif
+                                @else
+                                    <div class="alert alert-danger">
+                                        Anda Belum Mengisi Data Asal Sekolah
+                                    </div>
                                 @endif
+                            @else
+                                <div class="alert alert-danger">
+                                    Formulir Data Orang Tua Belum Terisi
+                                </div>
                             @endif
                         @endif
 
@@ -960,12 +976,12 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>Bank Pembayaran:</p>
-                                                    <img src="https://cdn3.iconfinder.com/data/icons/banks-in-indonesia-logo-badge/100/BNI-512.png"
-                                                        alt="BNI Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                                                    <p>Bank Pembayaran: Bank Syariah Indonesia</p>
+                                                    <img src="{{ asset('assets/images/logo-bsi.jpg') }}" alt="BSI Logo"
+                                                        class="img-fluid mb-3" style="max-width: 150px;">
                                                     <h5>Nomor Rekening Pembayaran Formulir:</h5>
                                                     <div class="border p-3 rounded mb-3">
-                                                        8581045301419027
+                                                        7139715823 (A/N YSS SMP ISLAM ASSAADATAIN)
                                                     </div>
                                                     <h5>Jumlah Pembayaran</h5>
                                                     <div class="border p-3 rounded">
@@ -1006,12 +1022,12 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>Bank Pembayaran:</p>
-                                                    <img src="https://cdn3.iconfinder.com/data/icons/banks-in-indonesia-logo-badge/100/BNI-512.png"
-                                                        alt="BNI Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                                                    <p>Bank Pembayaran: Bank Syariah Indonesia</p>
+                                                    <img src="{{ asset('assets/images/logo-bsi.jpg') }}" alt="BSI Logo"
+                                                        class="img-fluid mb-3" style="max-width: 150px;">
                                                     <h5>Nomor Rekening Pembayaran Formulir:</h5>
                                                     <div class="border p-3 rounded mb-3">
-                                                        8581045301419027
+                                                        7139715823 (A/N YSS SMP ISLAM ASSAADATAIN)
                                                     </div>
                                                     <h5>Jumlah Pembayaran</h5>
                                                     <div class="border p-3 rounded">
@@ -1077,12 +1093,12 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>Bank Pembayaran:</p>
-                                                    <img src="https://cdn3.iconfinder.com/data/icons/banks-in-indonesia-logo-badge/100/BNI-512.png"
-                                                        alt="BNI Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                                                    <p>Bank Pembayaran: Bank Syariah Indonesia</p>
+                                                    <img src="{{ asset('assets/images/logo-bsi.jpg') }}" alt="BSI Logo"
+                                                        class="img-fluid mb-3" style="max-width: 150px;">
                                                     <h5>Nomor Rekening Pembayaran Formulir:</h5>
                                                     <div class="border p-3 rounded mb-3">
-                                                        8581045301419027
+                                                        7139715823 (A/N YSS SMP ISLAM ASSAADATAIN)
                                                     </div>
                                                     <h5>Jumlah Pembayaran</h5>
                                                     <div class="border p-3 rounded">

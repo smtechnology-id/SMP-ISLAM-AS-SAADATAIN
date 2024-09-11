@@ -19,6 +19,12 @@ class UserController extends Controller
         return view('user.dashboard');
     }
 
+    // profile
+    public function profile()
+    {
+        return view('user.profile');
+    }
+
     public function registration()
     {
         $registrations = Registration::where('user_id', Auth::user()->id)->first();

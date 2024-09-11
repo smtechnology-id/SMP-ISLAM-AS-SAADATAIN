@@ -19,7 +19,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" id="datatable1">
                                     <thead>
                                         <tr class="text-center">
                                             <th>No</th>
@@ -51,6 +51,10 @@
                                                         <span class="badge bg-success">Diterima</span>
                                                     @elseif ($registration->status == 'rejected')
                                                         <span class="badge bg-danger">Ditolak</span>
+                                                    @elseif ($registration->status == 'pass')
+                                                        <span class="badge bg-success">Peserta Sudah Dinyatakan Lolos</span>
+                                                    @elseif ($registration->status == 'not_pass')
+                                                        <span class="badge bg-danger">Peserta Dinyatakan Tidak Lolos</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ $registration->tanggal_lahir }}</td>
@@ -65,7 +69,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="datatable1">
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
@@ -91,8 +95,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($registration->status == 'pending')
-                                                    <span class="badge bg-warning">Perlu Diverifikasi</span>
+                                                @if ($registration->status == 'pass')
+                                                    <span class="badge bg-success">Peserta Sudah Dinyatakan Lolos</span>
+                                                @elseif ($registration->status == 'not_pass')
+                                                    <span class="badge bg-danger">Peserta Dinyatakan Tidak Lolos</span>
                                                 @elseif ($registration->status == 'accepted')
                                                     <span class="badge bg-success">Diterima</span>
                                                 @elseif ($registration->status == 'rejected')

@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth.check:admin']], function () {
     Route::get('/admin/registration/detail/{id}', [AdminController::class, 'registrationDetail'])->name('admin.registration.detail');
     Route::post('/admin/registration/reject', [AdminController::class, 'registrationReject'])->name('admin.registration.reject');
     Route::get('/admin/registration/accept/{id}', [AdminController::class, 'registrationAccept'])->name('admin.registration.accept');
+    Route::post('/admin/registration/pass', [AdminController::class, 'registrationPass'])->name('admin.registration.result');
+
     // Payment
     Route::get('/admin/payment/formulir', [AdminController::class, 'paymentFormulir'])->name('admin.payment.formulir');
     Route::get('/admin/payment/formulir/accept/{id}', [AdminController::class, 'paymentFormulirAccept'])->name('admin.payment-formulir.accept');
@@ -46,10 +48,22 @@ Route::group(['middleware' => ['auth.check:admin']], function () {
 
     // anouncement
     Route::get('/admin/anouncement', [AdminController::class, 'anouncement'])->name('admin.anouncement');
+
+    // exam card
+    Route::get('/admin/exam-card', [AdminController::class, 'examCard'])->name('admin.exam-card');
+    Route::post('/admin/exam-card/upload', [AdminController::class, 'examCardUpload'])->name('admin.exam-card.upload');
+
+    // account
+    Route::get('/admin/account', [AdminController::class, 'account'])->name('admin.account');
+    Route::post('/admin/account/ganti_password', [AdminController::class, 'gantiPassword'])->name('admin.account.ganti_password');
 });
 
 Route::group(['middleware' => ['auth.check:user']], function () {
     Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+
+    // profile
+    Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/user/profile/update', [UserController::class, 'profileUpdate'])->name('user.profile.update');
 
     // Registration
     Route::get('/user/registration', [UserController::class, 'registration'])->name('user.registration');
