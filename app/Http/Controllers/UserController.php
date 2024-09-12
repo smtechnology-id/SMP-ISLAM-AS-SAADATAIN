@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Parents;
 use App\Models\Payment;
 use App\Models\Document;
@@ -11,6 +12,7 @@ use App\Models\Notification;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,7 +26,25 @@ class UserController extends Controller
     {
         return view('user.profile');
     }
-
+    public function profileUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|string|min:8',
+            'new_password' => 'nullable|string|min:8',
+        ]);
+        $userAuth = Auth::user();
+        $id = $userAuth->id;
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect()->route('user.profile')->with('success', 'Update berhasil!');
+    }
     public function registration()
     {
         $registrations = Registration::where('user_id', Auth::user()->id)->first();
@@ -426,4 +446,14 @@ class UserController extends Controller
         $examCard = ExamCard::where('user_id', Auth::user()->id)->first();
         return view('user.kartu_ujian', compact('examCard'));
     }
+
+
+    // Pengumuman
+    public function pengumuman()
+    {
+        $registration = Registration::where('user_id', Auth::user()->id)->first();
+        return view('user.pengumuman', compact('registration'));
+    }
+
+    
 }

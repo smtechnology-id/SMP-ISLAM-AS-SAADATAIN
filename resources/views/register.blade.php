@@ -45,20 +45,38 @@
                 <a href="{{ route('index') }}">Register Account || SMP ISLAM PLUS AS-SA’ADATAIN</a>
             </div>
             <p class="auth-description">Please sign-in to your account and continue to the dashboard.</p>
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
+            @if (session('success'))
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
+                    <div class="alert-content">
+                        <span class="alert-title">{{ session('success') }}</span>
+                    </div>
                 </div>
-            @endif
+                @endif
+                @if (session('error'))
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-warning"><i class="material-icons-outlined">error</i></div>
+                    <div class="alert-content">
+                        <span class="alert-title">{{ session('error') }}</span>
+                    </div>
+                </div>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-warning"><i class="material-icons-outlined">error</i></div>
+                    <div class="alert-content">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             <form action="{{ route('registerPost') }}" method="post">
                 @csrf
                 <div class="auth-credentials m-b-xxl">
                     <label for="signInEmail" class="form-label">Nama Lengkap</label>
                     <input type="text" name="name" class="form-control m-b-md" id="signInEmail" aria-describedby="signInEmail"
                         placeholder="Nama Lengkap">
-                    <label for="signInPassword" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="signInPassword" aria-describedby="signInPassword"
-                        placeholder="Username">
                     <label for="signInPassword" class="form-label">Email</label>
                     <input type="email" name="email" class="form-control" id="signInPassword" aria-describedby="signInPassword"
                         placeholder="Email">
@@ -72,7 +90,7 @@
 
                 <div class="auth-submit">
                     <button class="btn btn-primary" type="submit">Register</button>
-                    <a href="{{ route('index') }}" class="auth-forgot-password float-end">Sudah Punya Akun?</a>
+                    <a href="{{ route('index') }}" class="auth-forgot-password float-end btn btn-outline-primary">Sudah Punya Akun?</a>
                 </div>
             </form>
         </div>

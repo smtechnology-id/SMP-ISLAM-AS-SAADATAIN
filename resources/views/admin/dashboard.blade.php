@@ -10,6 +10,22 @@
                         <div class="card widget widget-stats">
                             <div class="card-body">
                                 <div class="widget-stats-container d-flex">
+                                    <div class="widget-stats-icon widget-stats-icon-danger">
+                                        <i class="material-icons-outlined">timer</i>
+                                    </div>
+                                    <div class="widget-stats-content flex-fill">
+                                        <span class="widget-stats-title">Pendaftaran Masuk (Perlu Diperiksa)</span>
+                                        <span class="widget-stats-amount">{{ $total_pendaftar_perlu_diperiksa }}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card widget widget-stats">
+                            <div class="card-body">
+                                <div class="widget-stats-container d-flex">
                                     <div class="widget-stats-icon widget-stats-icon-primary">
                                         <i class="material-icons-outlined">paid</i>
                                     </div>
@@ -18,7 +34,7 @@
                                         <span class="widget-stats-amount">{{ $total_pendaftar }}</span>
                                         <span class="widget-stats-info">Total Pendaftar</span>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -35,8 +51,21 @@
                                         <span class="widget-stats-amount">{{ $total_diterima }}</span>
                                         <span class="widget-stats-info">Total Diterima</span>
                                     </div>
-                                    <div class="widget-stats-indicator widget-stats-indicator-positive align-self-start">
-                                        <i class="material-icons">keyboard_arrow_up</i> 12%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card widget widget-stats">
+                            <div class="card-body">
+                                <div class="widget-stats-container d-flex">
+                                    <div class="widget-stats-icon widget-stats-icon-danger">
+                                        <i class="material-icons-outlined">paid</i>
+                                    </div>
+                                    <div class="widget-stats-content flex-fill">
+                                        <span class="widget-stats-title">Pembayaran Formulir Pending</span>
+                                        <span class="widget-stats-amount">{{ $pembayaran_formulir }}</span>
+                                        <span class="widget-stats-info">Perlu Diperiksa</span>
                                     </div>
                                 </div>
                             </div>
@@ -47,15 +76,12 @@
                             <div class="card-body">
                                 <div class="widget-stats-container d-flex">
                                     <div class="widget-stats-icon widget-stats-icon-danger">
-                                        <i class="material-icons-outlined">file_download</i>
+                                        <i class="material-icons-outlined">paid</i>
                                     </div>
                                     <div class="widget-stats-content flex-fill">
-                                        <span class="widget-stats-title">Downloads</span>
-                                        <span class="widget-stats-amount">140,390</span>
-                                        <span class="widget-stats-info">87 items downloaded</span>
-                                    </div>
-                                    <div class="widget-stats-indicator widget-stats-indicator-positive align-self-start">
-                                        <i class="material-icons">keyboard_arrow_up</i> 7%
+                                        <span class="widget-stats-title">Pembayaran Uang Deposit Pending</span>
+                                        <span class="widget-stats-amount">{{ $pembayaran_uang_masuk }}</span>
+                                        <span class="widget-stats-info">Perlu Diperiksa</span>
                                     </div>
                                 </div>
                             </div>
@@ -64,5 +90,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

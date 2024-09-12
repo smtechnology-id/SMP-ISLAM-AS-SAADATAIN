@@ -54,11 +54,12 @@
                                                                     <small class="text-danger">{{ $message }}</small>
                                                                 @enderror
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group mb-3">
                                                                 <label for="confirm_password">Confirm Password</label>
                                                                 <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
                                                             </div>
-                                                        </form> <!-- Menambahkan penutup form yang hilang -->
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                        </form>
                                                     </div>  
                                                 </div>
                                             </div>

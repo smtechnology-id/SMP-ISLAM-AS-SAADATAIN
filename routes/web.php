@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', [AuthController::class, 'index'])->name('index');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('loginPost');
 
 // Register
@@ -26,6 +27,14 @@ Route::post('/registerPost', [AuthController::class, 'registerPost'])->name('reg
 
 // Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Contact
+Route::get('/visi-misi', [AuthController::class, 'visiMisi'])->name('visi-misi');
+Route::get('/dewan-guru', [AuthController::class, 'dewanGuru'])->name('dewan-guru');
+Route::get('/kurikulum', [AuthController::class, 'kurikulum'])->name('kurikulum');
+Route::get('/kegiatan', [AuthController::class, 'kegiatan'])->name('kegiatan'); 
+Route::get('/contact', [AuthController::class, 'contact'])->name('contact');
+
 
 Route::group(['middleware' => ['auth.check:admin']], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -91,6 +100,9 @@ Route::group(['middleware' => ['auth.check:user']], function () {
 
     // kartu ujian
     Route::get('/user/kartu_ujian', [UserController::class, 'kartuUjian'])->name('user.kartu_ujian');
+
+    // pengumuman
+    Route::get('/user/pengumuman', [UserController::class, 'pengumuman'])->name('user.pengumuman');
 
 
 });

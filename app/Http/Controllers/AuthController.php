@@ -11,6 +11,11 @@ class AuthController extends Controller
 {
     public function index()
     {
+        return view('landing');
+    }
+
+    public function login()
+    {
         return view('login');
     }
 
@@ -42,7 +47,6 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
@@ -65,5 +69,33 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+
+    // Navbar
+
+    public function visiMisi()
+    {
+        return view('visi-misi');
+    }
+
+    public function dewanGuru()
+    {
+        return view('dewan-guru');
+    }
+
+    public function kurikulum()
+    {
+        return view('kurikulum');
+    }
+
+    public function kegiatan()
+    {
+        return view('kegiatan');
+    }
+
+    public function contact()
+    {
+        return view('contact');
     }
 }

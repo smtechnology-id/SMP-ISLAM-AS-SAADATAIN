@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="WELCOME TO SMP ISLAM PLUS AS-SA’ADATAIN">
+    <meta name="description" content="WELCOME TO SMP ISLAM PLUS AS-SA'ADATAIN">
     <meta name="keywords" content="admin,dashboard">
     <meta name="author" content="stacks">
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Dashboard || SMP ISLAM PLUS AS-SA’ADATAIN</title>
+    <title>Dashboard || SMP ISLAM PLUS AS-SA'ADATAIN</title>
 
     <!-- Styles -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,8 +41,8 @@
     <link href="{{ asset('assets/css/main.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/neptune.png') }}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/neptune.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/LOGO-SMP-ASSDAT.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/LOGO-SMP-ASSDAT.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
     
 
@@ -60,7 +60,7 @@
     <div class="app align-content-stretch d-flex flex-wrap">
         <div class="app-sidebar">
             <div class="logo">
-                <a href="#" class="logo-icon"><span class="logo-text">WBKP</span></a>
+                <a href="#" class="logo-icon"><span class="logo-text">PPDB</span></a>
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
                         @if (Auth::user()->photo)
@@ -69,8 +69,12 @@
                             <img src="{{ asset('assets/images/user.png') }}">
                         @endif
                         <span class="activity-indicator"></span>
-                        <span class="user-info-text">{{ Auth::user()->name }}<br><span class="user-state-info">
-                                Administrator
+                        <span class="user-info-text">{{ Str::limit(Auth::user()->name, 10) }}<br><span class="user-state-info">
+                                @if (Auth::user()->level == 'admin')
+                                    Administrator
+                                @elseif(Auth::user()->level == 'user')
+                                    Calon Peserta Didik
+                                @endif
                             </span>
                         </span>
                     </a>
@@ -130,6 +134,10 @@
                         <li class="@yield('active_kartu_ujian')">
                             <a href="{{ route('user.kartu_ujian') }}" class="active"><i
                                     class="material-icons-two-tone">book</i>Kartu Ujian</a>
+                        </li>
+                        <li class="@yield('active_pengumuman')">
+                            <a href="{{ route('user.pengumuman') }}" class="active"><i
+                                    class="material-icons-two-tone">announcement</i>Pengumuman</a>
                         </li>
                     @endif
 

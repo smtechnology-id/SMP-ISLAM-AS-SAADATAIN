@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Data Pendaftaran')
-@section('active_pendaftaran', 'active-page')
+@section('active_formulir_pendaftaran', 'active-page')
 @section('content')
     <div class="row">
         <div class="col-12">

@@ -45,17 +45,32 @@
                 <a href="{{ route('index') }}">WELCOME TO SMP ISLAM PLUS AS-SA’ADATAIN</a>
             </div>
             <p class="auth-description">Please sign-in to your account and continue to the dashboard.</p>
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
+                    <div class="alert-content">
+                        <span class="alert-title">{{ session('success') }}</span>
+                    </div>
                 </div>
-            @endif
-            
+                @endif
+                @if (session('error'))
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-warning"><i class="material-icons-outlined">error</i></div>
+                    <div class="alert-content">
+                        <span class="alert-title">{{ session('error') }}</span>
+                    </div>
+                </div>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-custom" role="alert">
+                    <div class="custom-alert-icon icon-warning"><i class="material-icons-outlined">error</i></div>
+                    <div class="alert-content">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             <form action="{{ route('loginPost') }}" method="post">
                 @csrf
                 <div class="auth-credentials m-b-xxl">
@@ -69,7 +84,7 @@
 
                 <div class="auth-submit">
                     <button class="btn btn-primary" type="submit">Login</button>
-                    <a href="{{ route('register') }}" class="auth-forgot-password float-end">Belum Punya Akun?</a>
+                    <a href="{{ route('register') }}" class="auth-forgot-password float-end btn btn-outline-primary">Belum Punya Akun?</a>
                 </div>
             </form>
         </div>

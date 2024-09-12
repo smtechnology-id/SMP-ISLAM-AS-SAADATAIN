@@ -21,7 +21,11 @@ class AdminController extends Controller
         $total_pendaftar = Registration::count();
         $total_diterima = Registration::where('status', 'pass')->count();
         $total_tidak_lolos = Registration::where('status', 'not_pass')->count();
-        return view('admin.dashboard', compact('total_pendaftar', 'total_diterima', 'total_tidak_lolos'));
+        $total_pendaftar_perlu_diperiksa = Registration::where('status', 'pending')->count();
+
+        $pembayaran_formulir = Payment::where('jenis_pembayaran', 'Formulir')->where('status', 'pending')->count();
+        $pembayaran_uang_masuk = Payment::where('jenis_pembayaran', 'Uang Masuk')->where('status', 'pending')->count();
+        return view('admin.dashboard', compact('total_pendaftar', 'total_diterima', 'total_tidak_lolos', 'total_pendaftar_perlu_diperiksa', 'pembayaran_formulir', 'pembayaran_uang_masuk'));
     }
 
     // registration

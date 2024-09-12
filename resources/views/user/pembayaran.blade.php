@@ -4,6 +4,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            <h4>Pembayaran</h4>
             @if ($registration)
                 @if ($registration->status == 'accepted' or $registration->status == 'pass' or $registration->status == 'not_pass')
                     <h5 class="card-title">Pembayaran Uang Deposit</h5>
