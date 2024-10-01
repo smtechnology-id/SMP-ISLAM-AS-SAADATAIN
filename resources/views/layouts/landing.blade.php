@@ -6,13 +6,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Selamat Datang di Website Resmi SMP ISLAM PLUS AS-SA'ADATAIN">
     <meta name="keywords"
-        content="theme_ocean, college, course, e-learning, education, high school, kids, learning, online, online courses, school, student, teacher, tutor, university">
+        content="smp, islam, plus, as-sa'adatain, dewan guru, kurikulum, kegiatan, contact">
     <meta name="author" content="theme_ocean">
     <!-- SITE TITLE -->
-    <title>Penn - Education HTML Template</title>
+    <title>Website Resmi SMP ISLAM PLUS AS-SA'ADATAIN</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/LOGO-SMP-ASSDAT.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/LOGO-SMP-ASSDAT.png') }}" />
     <!-- Latest Bootstrap min CSS -->
     <link rel="stylesheet" href="{{ asset('assets-landing/bootstrap/css/bootstrap.min.css') }}">
     <!-- Google Font -->
@@ -32,9 +33,6 @@
     <link rel="stylesheet" href="{{ asset('assets-landing/css/animate.css') }}">
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets-landing/css/style.css') }}" />
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
@@ -66,14 +64,9 @@
                         <nav id="main-menu" class="ms-auto">
                             <ul>
                                 <li><a class="nav-link" href="{{ route('index') }}">Home</a></li>
-                                <li>
-                                    <a class="nav-link" href="#">profile <span class="ti-angle-down"></span></a>
-                                    <ul>
-                                        <li><a class="nav-link" href="{{ route('visi-misi') }}">Visi Dan Misi</a></li>
-                                        <li><a class="nav-link" href="{{ route('dewan-guru') }}">Dewan Guru</a></li>
-                                        <li><a class="nav-link" href="{{ route('kurikulum') }}">Kurikulum</a></li>
-                                    </ul>
-                                </li>
+                                <li><a class="nav-link" href="{{ route('visi-misi') }}">About Us</a></li>
+                                <li><a class="nav-link" href="{{ route('dewan-guru') }}">Dewan Guru</a></li>
+                                <li><a class="nav-link" href="{{ route('kurikulum') }}">Kurikulum</a></li>
                                 <li><a class="nav-link" href="{{ route('kegiatan') }}">Kegiatan</a></li>
                                 <li><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                             </ul>
@@ -96,49 +89,28 @@
     <div class="footer section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="col-lg-4 col-sm-6 col-xs-12">
                     <div class="single_footer">
-                        <a href="index.html"><img src="{{ asset('assets-landing/images/all-img/logo2.png') }}"
+                        <a href="index.html"><img src="{{ asset('assets/images/LOGO-SMP-ASSDAT.png') }}"
                                 alt=""></a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae risus nec dui venenatis
-                            dignissim.</p>
+                            <p>SMP ISLAM PLUS AS-SA'ADATAIN</p>
                     </div>
-                    <div class="foot_social">
-                        <ul>
-                            <li><a href="#">TW</a></li>
-                            <li><a href="#">FB</a></li>
-                            <li><a href="#">INS</a></li>
-                            <li><a href="#">YT</a></li>
-                        </ul>
-                    </div>
+                    
                 </div><!--- END COL -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+                <div class="col-lg-4 col-sm-6 col-xs-12">
                     <div class="single_footer">
-                        <h4>Courses</h4>
+                        <h4>Links</h4>
                         <ul>
-                            <li><a href="#">Creative Writing</a></li>
-                            <li><a href="#">Digital Marketing</a></li>
-                            <li><a href="#">SEO Business</a></li>
-                            <li><a href="#">Social Marketing</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                            <li><a href="#">Website Development</a></li>
+                            <li><a href="{{ route('visi-misi') }}">About Us dan Visi Misi</a></li>
+                            <li><a href="{{ route('dewan-guru') }}">Dewan Guru</a></li>
+                            <li><a href="{{ route('kurikulum') }}">Kurikulum</a></li>
+                            <li><a href="{{ route('kegiatan') }}">Kegiatan</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div><!--- END COL -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="single_footer">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Knowledge Base</a></li>
-                            <li><a href="#">Affiliate Program</a></li>
-                            <li><a href="#">Community</a></li>
-                            <li><a href="#">Market API</a></li>
-                            <li><a href="#">Support team</a></li>
-                        </ul>
-                    </div>
-                </div><!--- END COL -->
-                <div class="col-lg-3 col-sm-6 col-xs-12">
+                
+                <div class="col-lg-4 col-sm-6 col-xs-12">
                     <div class="single_footer">
                         <h4>Contact Info</h4>
                         <div class="sf_contact">

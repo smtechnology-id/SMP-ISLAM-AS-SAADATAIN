@@ -178,18 +178,7 @@
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="material-icons">add</i>
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="addDropdownLink">
-                                        @if (Auth::user()->level == 'admin')
-                                            <li><a class="dropdown-item" href="#">New Account Duta Belia</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="#">New Account Guru</a></li>
-                                            <li><a class="dropdown-item" href="#">New Account Puskesmas</a></li>
-                                        @elseif(Auth::user()->level == 'duta')
-                                            <li><a class="dropdown-item" href="#">New Data Siswa</a></li>
-                                            <li><a class="dropdown-item" href="#">New Laporan</a></li>
-                                        @endif
-
-                                    </ul>
+                                   
                                 </li>
 
                             </ul>
